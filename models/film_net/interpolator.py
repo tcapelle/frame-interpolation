@@ -160,7 +160,7 @@ def create_model(x0: tf.Tensor, x1: tf.Tensor, time: tf.Tensor,
   # Note: In film_net we fix time to be 0.5, and recursively invoke the interpo-
   # lator for multi-frame interpolation. Below, we create a constant tensor of
   # shape [B]. We use the `time` tensor to infer the batch size.
-  mid_time = tf.keras.layers.Lambda(lambda x: tf.ones_like(x) * 0.5)(time)
+  mid_time = tf.ones_like(time) * time
   backward_flow = util.multiply_pyramid(backward_flow_pyramid, mid_time[:, 0])
   forward_flow = util.multiply_pyramid(forward_flow_pyramid, 1 - mid_time[:, 0])
 
